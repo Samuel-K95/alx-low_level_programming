@@ -1,8 +1,8 @@
 #include<stdio.h>
-
 /**
- *
- * this is where the main function goes
+ *  main - driver function
+ *  Description: prints the text
+ *  Return: 0 to terminate the code
  */
 int main(void)
 {
