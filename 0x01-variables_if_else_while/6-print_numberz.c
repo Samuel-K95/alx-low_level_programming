@@ -12,26 +12,8 @@ int main(void)
 
 	for (i = 0; i < 10; i++)
 	{
-		if (i == 0)
-		{
-			putchar('0');
-		}
-		else
-		{
-			num = i;
-			while (num > 0)
-			{
-				digit = num % 10;
-				reversed = reversed * 10 + digit;
-				num /= 10;
-			}
-			while (reversed > 0)
-			{
-				digit = reversed % 10;
-				putchar(digit + '0');
-				reversed /= 10;
-			}
-		}
+		putchar(i + '0');
 	}
+	putchar('\n');
 	return (0);
 }
