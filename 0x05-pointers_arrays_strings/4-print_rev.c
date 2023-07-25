@@ -13,7 +13,12 @@ void print_rev(char *s)
 {
 	int size;
 
-	size = strlen(s);
+	size = 0;
+
+	while (*(s + size) != '\0')
+	{
+		size++;
+	}
 
 	while (size >= 0)
 	{
