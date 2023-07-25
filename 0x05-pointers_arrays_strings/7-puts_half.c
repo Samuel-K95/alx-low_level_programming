@@ -24,10 +24,10 @@ void puts_half(char *str)
 	}
 	else
 	{
-		start = ((j - 1) / 2);
+		start = ((j - 1) / 2) + 1;
 	}
 
-	for (i = start + 1; str[i] != '\0'; i++)
+	for (i = start ; str[i] != '\0'; i++)
 	{
 		_putchar(str[i]);
 	}
