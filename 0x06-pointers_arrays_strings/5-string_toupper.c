@@ -3,7 +3,7 @@
 
 /**
  * string_toupper - changes to upper
- * 
+ *
  * @s: string to be changed to upper
  * Return: string
  */
@@ -16,7 +16,7 @@ char *string_toupper(char *s)
 
 	while (s[pos] != '\0')
 	{
-		if (s[pos] >= 97 && s[pos] <=122)
+		if (s[pos] >= 97 && s[pos] <= 122)
 		{
 			s[pos] = s[pos] - 32;
 		}
