@@ -5,7 +5,7 @@
  * _strncat - concatenate two strings
  * Description: string concatenation
  * @dest: string to be added on
- * @char: string to be added
+ * @src: string to be added
  * @n: number of bytes
  * Return: string
  */
