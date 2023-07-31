@@ -5,7 +5,7 @@
  * _strchr - search for the first occurence of apecific character
  *
  * @s: string in which the character is searched
- * @c character to be searched
+ * @c: character to be searched
  * Return: string
  */
 char *_strchr(char *s, char c)
