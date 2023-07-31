@@ -3,10 +3,10 @@
 
 /**
  * _strpbrk - searches for first occerence of any byte of accept in string
- *
+ * Description: searching
  * @s: byte to be searched in
  * @accept: byte to be searched from
- * Retun: String
+ * Return: String
  */
 
 char *_strpbrk(char *s, char *accept)
