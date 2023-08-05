@@ -4,8 +4,8 @@
 /**
  * main - driver function
  * Description: prints number of arguments
- * @argc - number of arguments
- * @argv - arguments
+ * @argc: number of arguments
+ * @argv: arguments
  * Return: 0 to termiante function
  */
 
