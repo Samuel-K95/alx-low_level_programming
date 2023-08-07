@@ -14,13 +14,6 @@ char *str_concat(char *s1, char *s2)
 {
 	unsigned int i, count, l1, l2;
 	char *dup;
-
-	if (s1 == NULL && s2 == NULL)
-	{
-		return (NULL);
-	}
-	else
-	{
 		if (s1 == NULL)
 			s1 = "";
 		if (s2 == NULL)
@@ -37,10 +30,11 @@ char *str_concat(char *s1, char *s2)
 			count++;
 		}
 		dup = malloc(sizeof(char) * count + 1);
+		if (dup == NULL)
+			return (NULL);
 		for (i = 0; i < l1; i++)
 			dup[i] = s1[i];
 		for (i = 0; i < count + 1; i++)
 			dup[l1 + i] = s2[i];
-	}
 	return (dup);
 }
