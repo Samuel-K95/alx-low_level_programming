@@ -21,61 +21,26 @@ char *str_concat(char *s1, char *s2)
 	}
 	else
 	{
-		count = 0;
-		i = 0;
-		l1 = 0;
-		l2 = 0;
-		if (s1 != NULL)
-		{
-		while (s1[i] != '\0')
-		{
-			count++;
-			i++;
-			l1++;
-		}
-		}
-		if (s2 != NULL)
-		{
-		i = 0;
-		while (s2[i] != '\0')
-		{
-			count++;
-			i++;
-			l2++;
-		}
-		}
 		if (s1 == NULL)
-			count = l2 + 1;
-		else if (s2 == NULL)
-			count = l1 + 1;
-		else
-			count = l1 + l2 + 1;
-
-		dup = malloc(sizeof(char) * count);
-
-		if (dup == NULL)
-			return (NULL);
-		if (s1 == NULL || s2 == NULL)
+			s1 = "";
+		if (s2 == NULL)
+			s2 = "";
+		l1 = 0, l2 = 0, count = 0;
+		while (s1[l1] != '\0')
 		{
-			if (s1 == NULL)
-			{
-				for (i = 0; i < count; i++)
-					dup[i] = s1[i];
-			}
-			else if (s2 == NULL)
-			{
-				for (i = 0; i < count; i++)
-					dup[i] = s2[i];
-			}
+			l1++;
+			count++;
 		}
-		else
+		while (s2[l2] != '\0')
 		{
-			for (i = 0; i < l1; i++)
-				dup[i] = s1[i];
-			for (i = 0; i < count; i++)
-				dup[l1 + i] = s2[i];
+			l2++;
+			count++;
 		}
+		dup = malloc(sizeof(char) * count + 1);
+		for (i = 0; i < l1; i++)
+			dup[i] = s1[i];
+		for (i = 0; i < count + 1; i++)
+			dup[l1 + i] = s2[i];
 	}
-
 	return (dup);
 }
