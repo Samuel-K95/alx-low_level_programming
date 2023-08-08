@@ -4,7 +4,7 @@
 
 /**
  * argstostr - argument to string
- * 
+ *
  * @ac: number of arguments
  * @av: arguments
  * Return: string
@@ -17,7 +17,6 @@ char *argstostr(int ac, char **av)
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
-
 	size = 0;
 	a = 0;
 	for (i = 0; i < ac; i++)
@@ -30,13 +29,10 @@ char *argstostr(int ac, char **av)
 		}
 		size++;
 	}
-
 	size++;
-
-	dup = malloc (sizeof(int*) * size);
+	dup = malloc(sizeof(char) * size);
 	if (dup == NULL)
 		return (NULL);
-
 	for (i = 0; i < ac; i++)
 	{
 		j = 0;
@@ -49,8 +45,6 @@ char *argstostr(int ac, char **av)
 		dup[a] = '\n';
 		a++;
 	}
-
 	dup[a] = '\0';
-
 	return (dup);
 }
