@@ -28,21 +28,27 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 		j++;
 	if (n >= j)
 		n = j;
-	size = i + n;
+	size = i + n + 1;
 
 
 	concat = malloc(sizeof(char) * (size));
 
 	if (concat == NULL)
 		return (NULL);
-
-	for (j = 0; s1[j]; j++)
+	j = 0;
+	while (j < i)
+	{
 		concat[j] = s1[j];
-	for (j = 0; j < n; j++)
-		concat[i + j] = s2[j];
-
-	size += 1;
-	concat[size] = '\0';
+		j++;
+	}
+	i = 0;
+	while (j < size)
+	{
+		concat[j] = s2[i];
+		i++;
+		j++;
+	}
+	concat[j] = '\0';
 
 
 	return (concat);
