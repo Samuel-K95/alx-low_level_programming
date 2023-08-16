@@ -27,13 +27,13 @@ int main(int argc, char *argv[])
 	if (operator[1] != '\0' || get_op_func(operator) == NULL)
 	{
 		printf("Error\n");
-		exit(98);
+		exit(99);
 	}
 
-	if ((operator[0] == '/' && num2 == 0) || (operator[0] == '%' && num2 == 0))
+	if ((*operator == '/' && num2 == 0) || (*operator == '%' && num2 == 0))
 	{
 		printf("Error\n");
-		exit(98);
+		exit(100);
 	}
 	printf("%d\n", get_op_func(operator)(num1, num2));
 
