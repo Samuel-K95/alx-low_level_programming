@@ -30,13 +30,12 @@ int main(int argc, char *argv[])
 
 	for (i = 0; i < num; i++)
 	{
-		printf("%02hhx ", store[i]);
-
 		if (i == num - 1)
 		{
-			putchar('\n');
+			printf("%02hhx\n", store[i]);
 			break;
 		}
+		printf("%02hhx ", store[i]);
 	}
 
 	return (0);
