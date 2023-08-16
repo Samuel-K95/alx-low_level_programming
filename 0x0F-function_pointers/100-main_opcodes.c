@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
 		if (i == num - 1)
 		{
 			putchar('\n');
+			break;
 		}
 	}
 
