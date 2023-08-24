@@ -23,7 +23,7 @@ list_t *add_node(list_t **head, const char *str)
 		return (NULL);
 	}
 
-	while(str[size] != '\0')
+	while (str[size] != '\0')
 		size++;
 
 	first->len = size;
@@ -33,9 +33,3 @@ list_t *add_node(list_t **head, const char *str)
 
 	return (*head);
 }
-
-
-
-	
-
-
