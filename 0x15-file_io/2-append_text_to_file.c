@@ -18,6 +18,8 @@ int append_text_to_file(const char *filename, char *text_content)
 
 	curr = 0;
 
+	if (text_content == NULL)
+		return (1);
 	while (text_content[curr] != '\0')
 		curr++;
 	file_open = open(filename, O_WRONLY | O_APPEND);
