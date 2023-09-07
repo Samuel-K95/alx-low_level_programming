@@ -12,7 +12,7 @@
  */
 int main(int argc, char *argv[])
 {
-	int from, read_, dest, write_;
+	int from, read_, dest, write_, i;
 	char *size;
 
 	if (argc != 3)
@@ -22,18 +22,48 @@ int main(int argc, char *argv[])
 	}
 
 	from = open(argv[1], O_RDONLY);
+	if (from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
+		exit(98);
+	}
 
 	size = malloc(sizeof(char) * 1024);
-
+	if (size == NULL)
+		return (0);
 	read_ = read(from, size, 1024);
+	if (read_ == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
+		exit(98);
+	}
 	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	do {
+	if (dest == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
+	for (i = 0; read_; i++)
+	{
 		write_ = write(dest, size, read_);
 		if (write_ == -1)
-			printf("error");
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			exit(99);
+		}
 		read_ = read(from, size, 1024);
 		dest = open(argv[2], O_WRONLY | O_APPEND);
-	} while (read_ > 0);
+		if (read_ == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
+			exit(98);
+		}
+		if (dest == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			exit(99);
+		}
+	}
 
 	free(size);
 	close(from);
