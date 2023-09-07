@@ -36,8 +36,7 @@ int main(int argc, char *argv[])
 	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (dest == -1)
 		check_write(argv[2]);
-	for (i = 0; read_; i++)
-	{
+	do {
 		write_ = write(dest, size, read_);
 		if (write_ == -1)
 			check_write(argv[2]);
@@ -47,7 +46,7 @@ int main(int argc, char *argv[])
 			check_read(argv[1]);
 		if (dest == -1)
 			check_write(argv[2]);
-	}
+	} while (read_ > 0);
 	free(size);
 	i = close(from);
 	if (i == -1)
