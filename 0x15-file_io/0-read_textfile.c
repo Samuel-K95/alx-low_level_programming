@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * read_testfile - reads text file
+ * read_textfile - reads text file
  *
  * @filename: file to read from
  * @letters: content to be writted
@@ -18,7 +18,8 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (file_open < 0)
 		return (0);
 	pointer = malloc(sizeof(char) * letters);
-
+	if (pointer == NULL)
+		return (0);
 	file_read = read(file_open, pointer, letters);
 	file_write = write(STDOUT_FILENO, pointer, file_read);
 	free(pointer);
