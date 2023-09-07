@@ -50,9 +50,11 @@ int main(int argc, char *argv[])
 	}
 	free(size);
 	i = close(from);
-	read_ = close(dest);
-	if (i == -1 || read_ == -1)
+	if (i == -1)
 		check_close(i);
+	read_ = close(dest);
+	if (read_ == -1)
+		check_close(read_);
 
 	return (0);
 }
