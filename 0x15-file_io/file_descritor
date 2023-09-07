@@ -1,0 +1,66 @@
+- file descriptors typically have non-negative vaues, with negative being reerved to indicate "no value" or error 
+conditions.
+- file descriptres are a part of the POSIX API each unix process shpuld have three standard POSIX file descriptors,
+corresponding to the three standard streams.
+
+
+symbolic constanTt-> <unistd.h>
+                  -> standard input ........ STDIN_FILENO
+		  -> standart output ....... STDOUT_FILENO
+		  -> standard error ........ STDERR_FILENO
+Standard streams
+
+interconnected input and out put communication channels between computer program and its enviroment when it begins execution.
+systems may be used to chain applications, meaning that the ouput stream of one program can be redirected to be theinput stream to another application. in many operating system this is expressed by listing the application names, separated by the vertical bar character, for this reason foten called the pipeline character. 
+
+END OF FILE
+
+in computing end-of-file is a condition in a computer operating system where no more data can be read from a data source. the data is usually called a file or stream.
+
+in c standard library, the character reading function such as getchar return a value equal toa the symbolci value equal to the symbolic value EOF to indicate that and end-of-file has occured. The actual value of EOF is implementation-dependant and must be negative(commonly -1).
+
+some MS-DOS programs including parts of the microsoft MS-DOS shell and operating system utility program such as ELDIN treat  a Contol-Z in a text file as marking the end of meaningful data, and/or append a Control-Z to the end when writign a text file. This was done for two main reasons:
+	-> Backward compatibility with CP/M.
+	-> it allows programs to use te same code to read input from both a terminal and a text file.
+
+STANDARD INPUT(STDIN)
+
+Standard input is a dtream from which a program reads its input data. The program requests data transfers by use of the read operation. Not all programs require stream input. 
+
+The file descriptor for standard input is 0 (zero); 
+the POSIX <unistd.h> definition is STDIN_FILENO;
+the corresponding c <stdio.h> variable is FILE* stdin;
+
+STANDARTD OUPUT(STDOUT)
+
+standard ouput is a stream to which a program writs its output data. The program requests data transfer with the write operation. not all program generate ouput.
+
+The file descriptor for standard output is 1 (one);
+The POSIX <unistd.h> definition is STDOUT_FILENO;
+the corresponding c <stdio.h> variable is FILE* stdout.
+
+
+STANDARD ERROR(STDERR)
+
+standard error is another output stream typically used by programs to ouput error messages or diagnostics. it is a strea of standard output and can be redirected separately.
+it is acceptable and normal to direct standard ouput and standard error to the same destination, such as the text terminal. 
+
+The file descriptor for stndard error is defined by 2 (two);
+The <unistd.h> header files is STDER_FILENO;
+the coresponding c is <stdio.h> is FILE* stder;
+
+Bourne-style shells allow standard error to be redirected to the same destination that standard output is directed to using:  2>&1
+
+csh-style shells allow standard error to be redirected to the same destination that standard output is directed to using :  >&
+
+
+
+DATA BUFFER
+
+in CS a data buffer is a region of memory used to temporrily store data while it is being moved from one place to anoteher. Typically the data is stored in a bufferr as it is retrienved from an input device or just before it is sent to an ouput device. 
+
+majority of buffffers are implemented in software which tyically use the faster RAM to store temporary data, due too faster access time compared with hard disk drives. 
+
+a buffer often adjusts timing by implementing a queue algorithm in memory, simultaneously writing data into the queue at one rate and reading it at another rate.
+
+
