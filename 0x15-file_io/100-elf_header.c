@@ -18,49 +18,6 @@ void versionawta(unsigned char *e_indent);
 void abitiprint(unsigned char *e_indent);
 void sabiprint(unsigned char *e_indent);
 
-int main(int __attribute__((__unused__)) argc, char *argv[])
-{
-	int file_open, file_read;
-	Elf64_Ehdr *chnklat;
-
-	file_open = open(argv[1], O_RDONLY);
-
-	if (file_open == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
-		exit(98);
-	}
-	chnklat = malloc(sizeof(Elf64_Ehdr));
-	if (chnklat == NULL)
-	{
-		mezgat(file_open);
-		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
-		exit(98);
-	}
-	file_read = read(file_open, chnklat, sizeof(Elf64_Ehdr));
-	if (file_read == -1)
-	{
-		mezgat(file_open);
-		free(chnklat);
-		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
-		exit(98);
-	}
-	elfcheck(chnklat->e_ident);
-	printf("ELF Header:\n");
-	asmatprint(chnklat->e_ident);
-	kiflprint(chnklat->e_ident);
-	merejaprint(chnklat->e_ident);
-	versionawta(chnklat->e_ident);
-	sabiprint(chnklat->e_ident);
-	abitiprint(chnklat->e_ident);
-	aynetprint(chnklat->e_type, chnklat->e_ident);
-	agebabprint(chnklat->e_entry, chnklat->e_ident);
-
-	free(chnklat);
-	mezgat(file_open);
-	return (0);
-}
-
 /**
  * mezgat - closes file
  * @num: file descript
@@ -278,3 +235,52 @@ void elfcheck(unsigned char *e_indent)
 		bota++;
 	}
 }
+/**
+ * main - dirver function
+ * @argc: unused
+ * @argv: array
+ * Return: integer
+ */
+int main(int __attribute__((__unused__)) argc, char *argv[])
+{
+        int file_open, file_read;
+        Elf64_Ehdr *chnklat;
+
+        file_open = open(argv[1], O_RDONLY);
+
+        if (file_open == -1)
+        {
+                dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+                exit(98);
+        }
+        chnklat = malloc(sizeof(Elf64_Ehdr));
+        if (chnklat == NULL)
+        {
+                mezgat(file_open);
+                dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+                exit(98);
+        }
+        file_read = read(file_open, chnklat, sizeof(Elf64_Ehdr));
+        if (file_read == -1)
+        {
+                mezgat(file_open);
+                free(chnklat);
+                dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
+                exit(98);
+        }
+        elfcheck(chnklat->e_ident);
+        printf("ELF Header:\n");
+        asmatprint(chnklat->e_ident);
+        kiflprint(chnklat->e_ident);
+        merejaprint(chnklat->e_ident);
+        versionawta(chnklat->e_ident);
+        sabiprint(chnklat->e_ident);
+        abitiprint(chnklat->e_ident);
+        aynetprint(chnklat->e_type, chnklat->e_ident);
+        agebabprint(chnklat->e_entry, chnklat->e_ident);
+
+        free(chnklat);
+        mezgat(file_open);
+        return (0);
+}
+
