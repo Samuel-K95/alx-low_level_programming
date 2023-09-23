@@ -1,97 +1,122 @@
 #include "main.h"
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 
-void check_close(int i);
-void check_read(char *i);
-void check_write(char *i);
+
+char *allocate_buffer(char *filename);
+
+
+void close_file_descriptor(int fd);
 
 /**
- * main - main function
+ * allocate_buffer - Allocates 1024 bytes for a buffer.
+ * @filename: The name of the file the buffer is storing characters for.
  *
- * @argc: number of arguments
- * @argv: list of arguments
- * Return: exit status and 0 if success
+ * Return: A pointer to the newly-allocated buffer.
+ */
+char *allocate_buffer(char *filename)
+{
+	char *buffer;
+
+	buffer = malloc(sizeof(char) * 1024);
+
+	if (buffer == NULL)
+	{
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", filename);
+		exit(99);
+	}
+
+	return buffer;
+}
+
+/**
+ * close_file_descriptor - Closes file descriptors.
+ * @fd: The file descriptor to be closed.
+ */
+void close_file_descriptor(int fd)
+{
+	int result;
+
+	result = close(fd);
+
+	if (result == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
+}
+
+/**
+ * main - Copies the contents of a file to another file.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
+ *
+ * Return: 0 on success.
+ *
+ * Description: If the argument count is incorrect - exit code 97.
+ * If file_from does not exist or cannot be read - exit code 98.
+ * If file_to cannot be created or written to - exit code 99.
+ * If file_to or file_from cannot be closed - exit code 100.
  */
 int main(int argc, char *argv[])
 {
-	int from, read_, dest, write_, i;
-	char *size;
+	int source_fd, destination_fd, read_result, write_result;
+	char *buffer;
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp source_file destination_file\n");
 		exit(97);
 	}
-	from = open(argv[1], O_RDONLY);
-	if (from == -1)
-		check_read(argv[1]);
-	size = malloc(sizeof(char) * 1024);
-	if (size == NULL)
-		return (0);
-	read_ = read(from, size, 1024);
-	if (read_ == -1)
-		check_read(argv[1]);
-	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (dest == -1)
-		check_write(argv[2]);
+
+
+	buffer = allocate_buffer(argv[2]);
+
+
+	source_fd = open(argv[1], O_RDONLY);
+
+
+	read_result = read(source_fd, buffer, 1024);
+
+
+	destination_fd = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+
 	do {
-		write_ = write(dest, size, read_);
-		if (write_ == -1)
-			check_write(argv[2]);
-		read_ = read(from, size, 1024);
-		dest = open(argv[2], O_WRONLY | O_APPEND);
-		if (read_ == -1)
-			check_read(argv[1]);
-		if (dest == -1)
-			check_write(argv[2]);
-	} while (read_ > 0);
-	free(size);
-	i = close(from);
-	if (i == -1)
-		check_close(i);
-	read_ = close(dest);
-	if (read_ == -1)
-		check_close(read_);
 
-	return (0);
+		if (source_fd == -1 || read_result == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
+		}
+
+
+		write_result = write(destination_fd, buffer, read_result);
+
+
+		if (destination_fd == -1 || write_result == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
+			exit(99);
+		}
+
+
+		read_result = read(source_fd, buffer, 1024);
+
+
+		destination_fd = open(argv[2], O_WRONLY | O_APPEND);
+
+	} while (read_result > 0);
+
+
+	free(buffer);
+
+	close_file_descriptor(source_fd);
+	close_file_descriptor(destination_fd);
+
+	return 0;
 }
-
-/**
- * check_write - write checker
- *
- * @i: number to be checked
- * Return: exit status
- */
-void check_write(char *i)
-{
-	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", i);
-	exit(99);
-}
-
-/**
- * check_read - read checker
- *
- * @i: number to be checked
- * Return: exit status
- */
-
-void check_read(char *i)
-{
-	dprintf(STDERR_FILENO, "Error: can't read from file %s\n", i);
-	exit(98);
-}
-/**
- * check_close - checks close
- *
- * @i: number to be checked
- * Return: exit status
- */
-
-void check_close(int i)
-{
-	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", i);
-	exit(100);
-}
-
