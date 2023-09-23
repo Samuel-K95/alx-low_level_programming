@@ -27,7 +27,7 @@ char *allocate_buffer(char *filename)
 		exit(99);
 	}
 
-	return buffer;
+	return (buffer);
 }
 
 /**
@@ -118,5 +118,5 @@ int main(int argc, char *argv[])
 	close_file_descriptor(source_fd);
 	close_file_descriptor(destination_fd);
 
-	return 0;
+	return (0);
 }
