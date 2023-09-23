@@ -81,7 +81,7 @@ void mezgat(int num)
  */
 void agebabprint(unsigned long int e_entry, unsigned char *e_ident)
 {
-	printf(" Entry point address: ");
+	printf(" Entry point address: \t");
 
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 	{
@@ -102,7 +102,7 @@ void aynetprint(unsigned int e_type,unsigned char *e_indent)
 {
 	if (e_indent[EI_DATA] == ELFDATA2MSB)
 		e_type >>= 8;
-	printf(" Type: ");
+	printf(" Type: \t");
 	switch (e_type)
 	{
 		case ET_NONE:
@@ -131,7 +131,7 @@ void aynetprint(unsigned int e_type,unsigned char *e_indent)
 
 void sabiprint(unsigned char *e_indent)
 {
-	printf(" OS/ABI: ");
+	printf(" OS/ABI: \t");
 	switch (e_indent[EI_OSABI])
 	{
 		case ELFOSABI_NONE:
@@ -174,7 +174,7 @@ void sabiprint(unsigned char *e_indent)
  */
 void abitiprint(unsigned char *e_indent)
 {
-	printf(" ABI Version: %d\n", e_indent[EI_ABIVERSION]);
+	printf(" ABI Version: \t%d\n", e_indent[EI_ABIVERSION]);
 }
 /**
  * versionawta - prints version
@@ -182,7 +182,7 @@ void abitiprint(unsigned char *e_indent)
  */
 void versionawta(unsigned char *e_indent)
 {
-	 printf(" Version: %d",  e_indent[EI_VERSION]);
+	 printf(" Version: \t%d",  e_indent[EI_VERSION]);
 	 switch (e_indent[EI_VERSION])
 	 {
 		 case EV_CURRENT:
@@ -200,7 +200,7 @@ void versionawta(unsigned char *e_indent)
  */
 void merejaprint(unsigned char *e_indent)
 {
-	printf(" Data: ");
+	printf(" Data: \t");
 	switch (e_indent[EI_DATA])
 	{
 		case ELFDATANONE:
@@ -222,7 +222,7 @@ void merejaprint(unsigned char *e_indent)
  */
 void kiflprint(unsigned char *e_indent)
 {
-	printf(" Class: ");
+	printf(" Class: \t");
 	switch (e_indent[EI_CLASS])
 	{
 		case ELFCLASSNONE:
@@ -248,7 +248,7 @@ void asmatprint(unsigned char *e_indent)
 {
 	int bota;
 
-	printf(" Magic: ");
+	printf(" Magic: \t");
 	while (bota < EI_NIDENT)
 	{
 		printf("%02x", e_indent[bota]);
